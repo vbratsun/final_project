@@ -1,23 +1,24 @@
 package ru.yandex.practicum.ui.pages;
 
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
+import ru.yandex.practicum.constants.Urls;
+import ru.yandex.practicum.ui.components.Header;
 
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.open;
 
 public class HomePage {
 
-    private final By loginAndRegisterButtonSelector = byXpath("//button[text()='Вход и регистрация']");
+    private Header header;
 
-    private final SelenideElement loginAndRegisterButton = $(loginAndRegisterButtonSelector);
+    public HomePage() {
+        this.header = new Header();
+    }
 
-    public LoginPage clickLoginAndRegisterButton() {
-        loginAndRegisterButton.click();
+    public Header getHeader() {
+        return header;
+    }
 
-        LoginPage loginPage = page(LoginPage.class);
-
-        return loginPage;
+    public HomePage openPage() {
+        open(Urls.HOME_PAGE_URL);
+        return this;
     }
 }

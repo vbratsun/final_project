@@ -3,22 +3,26 @@ package ru.yandex.practicum.ui.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import ru.yandex.practicum.api.models.UserRegisterRequest;
+import ru.yandex.practicum.constants.Urls;
 
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
 
-    private final By emailInputSelector = byXpath("//input[@name='email']");
-    private final By passwordInputSelector = byXpath("//input[@name='password']");
-    private final By submitPasswordInputSelector = byXpath("//input[@name='submitPassword']");
-    private final By createAccountButtonSelector = byXpath("//button[text()='Создать аккаунт']");
+    private final By emailInputSelector = By.xpath("//input[@name='email']");
+    private final By passwordInputSelector = By.xpath("//input[@name='password']");
+    private final By submitPasswordInputSelector = By.xpath("//input[@name='submitPassword']");
+    private final By createAccountButtonSelector = By.xpath("//button[text()='Создать аккаунт']");
 
     private final SelenideElement emailInput = $(emailInputSelector);
     private final SelenideElement passwordInput = $(passwordInputSelector);
     private final SelenideElement submitPasswordInput = $(submitPasswordInputSelector);
     private final SelenideElement createAccountButton = $(createAccountButtonSelector);
+
+    public RegistrationPage openPage() {
+        open(Urls.REGISTER_PAGE_URL);
+        return this;
+    }
 
     public void setEmail(String email) {
         emailInput.setValue(email);
@@ -41,9 +45,7 @@ public class RegistrationPage {
         setPassword(user.getPassword());
         setSubmitPassword(user.getSubmitPassword());
         clickCreateAccountButton();
-
-        HomePage homapage = page(HomePage.class);
-
-        return homapage;
+        HomePage homepage = page(HomePage.class);
+        return homepage;
     }
 }

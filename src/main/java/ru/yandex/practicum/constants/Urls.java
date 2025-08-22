@@ -6,5 +6,5 @@ public class Urls {
     public static final String LOGIN_PAGE_URL = BASE_URI + "/login";
     public static final String REGISTER_PAGE_URL = BASE_URI + "/regiatration";
     public static final String PROFILE_PAGE_URL = BASE_URI + "/profile";
-    public static final String CREATE_ADVERTISEMENT_PAGE_URL = BASE_URI + "/create-lisiting";
+    public static final String CREATE_AD_PAGE_URL = BASE_URI + "/create-lisiting";
 }
