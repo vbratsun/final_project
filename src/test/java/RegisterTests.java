@@ -2,38 +2,36 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.yandex.practicum.api.clients.AuthClient;
 import ru.yandex.practicum.api.models.UserRegisterRequest;
-import ru.yandex.practicum.api.utils.DataHelper;
 import ru.yandex.practicum.constants.Urls;
 
-@DisplayName("Тесты авторизации")
-@Epic("Авторизация")
-public class RegisterTests extends TestBase{
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
-    private final UserRegisterRequest createdUser = new DataHelper().createRandomUser();
-
-    @Test
-    @DisplayName("фывф")
-    @Description("фыв")
-    @Feature("фыв")
-    @Story("фыв")
-    public void testOpenHomePage(){
-        openPage(Urls.BASE_URI);
-    }
+@DisplayName("Тесты на регистрацию")
+@Epic("Регистрация")
+public class RegisterTests extends TestBase {
 
     @Test
-    @DisplayName("Успешная регистрация")
-    @Description("Проверка успешной регистрации через UI")
-    @Feature("Логин")
-    @Story("Успешный вход")
-    public void testRegistrationSuccess(){
-        AuthClient authClient = new AuthClient(Urls.BASE_URI);
-        Response response = authClient.registerUser(createdUser);
-        response.then().statusCode(HttpStatus.SC_CREATED);
+    @DisplayName("blablabla")
+    @Description("blablabla")
+    @Feature("blablabla")
+    @Story("blablabla")
+    public void testSuccessfulRegistration() {
+        UserRegisterRequest createdUser = dataHelper.createRandomUser();
+
+        openPage(Urls.HOME_PAGE_URL);
+        $(byXpath("//button[text()='Вход и регистрация']")).click();
+        $(byXpath("//button[text()='Нет аккаунта']")).click();
+
+        $(byXpath("//input[@name='email']")).setValue(createdUser.getEmail());
+        $(byXpath("//input[@name='password']")).setValue(createdUser.getPassword());
+        $(byXpath("//input[@name='submitPassword']")).setValue(createdUser.getSubmitPassword());
+
+        $(byXpath("//button[text()='Создать аккаунт']")).click();
+        sleep(5000);
     }
 }

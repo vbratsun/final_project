@@ -15,8 +15,8 @@ public class DataHelper {
     public UserRegisterRequest createRandomUser() {
         String email = generateEmail();
         String password = generatePassword();
-        String name = email;
-        return new UserRegisterRequest(email, password, name);
+        String submitPassword = password;
+        return new UserRegisterRequest(email, password, submitPassword);
     }
 
     private String generateEmail() {

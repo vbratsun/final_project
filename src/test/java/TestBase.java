@@ -2,10 +2,13 @@ import com.codeborne.selenide.Configuration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import ru.yandex.practicum.api.utils.DataHelper;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestBase {
+
+    protected DataHelper dataHelper;
 
     @BeforeEach
     public void setup() {
@@ -14,18 +17,19 @@ public class TestBase {
 
         // Настройки Selenide
         Configuration.browser = "chrome";
-        Configuration.timeout = 10000; // 10 секунд
+        Configuration.timeout = 10000;
         Configuration.browserSize = "maximize";
-        Configuration.headless = false; // true для headless-режима
+        Configuration.headless = false;
+
+        // Подготовить тестовые данные
+        this.dataHelper = new DataHelper();
     }
 
     @AfterEach
     public void tearDown() {
-        // Закрываем браузер
         closeWebDriver();
     }
 
-    // Метод для открытия страниц
     protected void openPage(String url) {
         open(url);
     }
