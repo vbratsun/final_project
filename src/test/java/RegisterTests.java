@@ -6,10 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.api.models.UserRegisterRequest;
 import ru.yandex.practicum.constants.Urls;
+import ru.yandex.practicum.ui.pages.HomePage;
+import ru.yandex.practicum.ui.pages.LoginPage;
+import ru.yandex.practicum.ui.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 @DisplayName("Тесты на регистрацию")
 @Epic("Регистрация")
@@ -23,15 +25,11 @@ public class RegisterTests extends TestBase {
     public void testSuccessfulRegistration() {
         UserRegisterRequest createdUser = dataHelper.createRandomUser();
 
-        openPage(Urls.HOME_PAGE_URL);
-        $(byXpath("//button[text()='Вход и регистрация']")).click();
-        $(byXpath("//button[text()='Нет аккаунта']")).click();
+        HomePage homePage = open(Urls.HOME_PAGE_URL, HomePage.class);
+        homePage.clickLoginAndRegisterButton()
+                .clickRegisterButton()
+                .registerUser(createdUser);
 
-        $(byXpath("//input[@name='email']")).setValue(createdUser.getEmail());
-        $(byXpath("//input[@name='password']")).setValue(createdUser.getPassword());
-        $(byXpath("//input[@name='submitPassword']")).setValue(createdUser.getSubmitPassword());
-
-        $(byXpath("//button[text()='Создать аккаунт']")).click();
         sleep(5000);
     }
 }

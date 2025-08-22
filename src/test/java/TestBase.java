@@ -29,8 +29,4 @@ public class TestBase {
     public void tearDown() {
         closeWebDriver();
     }
-
-    protected void openPage(String url) {
-        open(url);
-    }
 }
