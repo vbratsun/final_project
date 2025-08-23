@@ -3,7 +3,6 @@ package ru.yandex.practicum.ui.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import ru.yandex.practicum.api.models.CreateAdRequest;
-import ru.yandex.practicum.api.models.UserRegisterRequest;
 import ru.yandex.practicum.constants.Urls;
 import ru.yandex.practicum.ui.components.Header;
 
@@ -56,6 +55,7 @@ public class CreateAdPage {
         setName(ad.getName());
         setDescription(ad.getDescription());
         setPrice(ad.getPrice());
+        clickPublishButton();
         HomePage homepage = page(HomePage.class);
         return homepage;
     }

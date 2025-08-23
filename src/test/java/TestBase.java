@@ -5,6 +5,7 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import ru.yandex.practicum.api.clients.AuthClient;
+import ru.yandex.practicum.api.models.CreateAdRequest;
 import ru.yandex.practicum.api.models.UserRegisterRequest;
 import ru.yandex.practicum.api.utils.DataHelper;
 import ru.yandex.practicum.constants.Urls;
@@ -21,6 +22,7 @@ public class TestBase {
     protected LoginPage loginPage;
 
     protected UserRegisterRequest createdUser;
+    protected CreateAdRequest createdAd;
 
     @BeforeEach
     public void setup() {
@@ -31,6 +33,7 @@ public class TestBase {
         this.loginPage = new LoginPage();
 
         this.createdUser = this.dataHelper.createRandomUser();
+        this.createdAd = this.dataHelper.createRandomAd();
         this.registerUser(this.createdUser);
     }
 
