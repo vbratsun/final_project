@@ -2,9 +2,11 @@ package ru.yandex.practicum.ui.components;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import ru.yandex.practicum.ui.pages.EditAdPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.page;
 
 public class AdCard {
 
@@ -46,6 +48,12 @@ public class AdCard {
 
     public void clickEdit() {
         editButtonElement.shouldBe(visible).click();
+    }
+
+    public EditAdPage editAd() {
+        clickEdit();
+        EditAdPage editAdPage = page(EditAdPage.class);
+        return editAdPage;
     }
 
     // Методы для проверок

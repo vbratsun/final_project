@@ -4,30 +4,59 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.ui.components.AdCard;
 import ru.yandex.practicum.ui.pages.CreateAdPage;
+import ru.yandex.practicum.ui.pages.EditAdPage;
 import ru.yandex.practicum.ui.pages.ProfilePage;
 
+import java.util.List;
+
 @DisplayName("Тесты на создание объявления")
-@Epic("Создание объявления")
+@Epic("Объявления")
 public class AdTests extends TestBase {
 
-    @Test
-    @DisplayName("Успешное создание объявления")
-    @Description("Успешное создание объявления в любой категории")
-    @Feature("Создание объявления")
-    @Story("Создание объявления")
-    public void testAdCanBeCreated() {
+    private final String EDIT_AD_LABEL_TEXT = "Редактирование объявления";
+
+    private CreateAdPage createAdPage;
+
+    @Override
+    public void setup() {
+        super.setup();
+
         this.loginPage = this.loginPage.openPage();
-        CreateAdPage createAdPage = this.loginPage
+        this.createAdPage = this.loginPage
                 .loginUser(this.createdUser)
                 .getHeader()
                 .shouldBeAuthorized()
                 .clickCreateAdButton();
+    }
 
-        ProfilePage profilePage = createAdPage.createAd(this.createdAd)
+    @Test
+    @DisplayName("Успешное создание объявления")
+    @Description("Успешное создание объявления в любой категории")
+    @Feature("Объявления")
+    @Story("Объявления")
+    public void testAdCanBeCreated() {
+        ProfilePage profilePage = this.createAdPage.createAd(this.createdAd)
                 .getHeader()
                 .clickProfileButton();
 
         profilePage.shouldHaveAdvertisements();
+    }
+
+    @Test
+    @DisplayName("Успешное изменение объявления")
+    @Description("Успешное редактирование своего объявления")
+    @Feature("Объявления")
+    @Story("Объявления")
+    public void testAdCanBeEdited(){
+        ProfilePage profilePage = this.createAdPage.createAd(this.createdAd)
+                .getHeader()
+                .clickProfileButton();
+        profilePage.shouldHaveAdvertisements();
+
+        AdCard firstAd = profilePage.getAllAdvertisements().get(0);
+        EditAdPage editAdPage = firstAd.editAd();
+        editAdPage.shouldHaveTitle(EDIT_AD_LABEL_TEXT);
     }
 }
