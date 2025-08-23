@@ -9,8 +9,6 @@ import ru.yandex.practicum.ui.pages.CreateAdPage;
 import ru.yandex.practicum.ui.pages.EditAdPage;
 import ru.yandex.practicum.ui.pages.ProfilePage;
 
-import java.util.List;
-
 @DisplayName("Тесты на создание объявления")
 @Epic("Объявления")
 public class AdTests extends TestBase {
@@ -49,7 +47,7 @@ public class AdTests extends TestBase {
     @Description("Успешное редактирование своего объявления")
     @Feature("Объявления")
     @Story("Объявления")
-    public void testAdCanBeEdited(){
+    public void testAdCanBeEdited() {
         ProfilePage profilePage = this.createAdPage.createAd(this.createdAd)
                 .getHeader()
                 .clickProfileButton();
@@ -58,5 +56,20 @@ public class AdTests extends TestBase {
         AdCard firstAd = profilePage.getAllAdvertisements().get(0);
         EditAdPage editAdPage = firstAd.editAd();
         editAdPage.shouldHaveTitle(EDIT_AD_LABEL_TEXT);
+    }
+
+    @Test
+    @DisplayName("Успешное удаление объявления")
+    @Description("Успешное удаление своего объявлени")
+    @Feature("Объявления")
+    @Story("Объявления")
+    public void testAdCanBeDeleted() {
+        ProfilePage profilePage = this.createAdPage.createAd(this.createdAd)
+                .getHeader()
+                .clickProfileButton();
+        profilePage.shouldHaveAdvertisements();
+
+        AdCard firstAd = profilePage.getAllAdvertisements().get(0);
+        firstAd.shouldHaveDeleteButton();
     }
 }

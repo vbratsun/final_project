@@ -15,11 +15,13 @@ public class AdCard {
     private final SelenideElement locationElement;
     private final SelenideElement priceElement;
     private final SelenideElement editButtonElement;
+    private final SelenideElement deleteButtonElement;
 
     private final By titleSelector = By.cssSelector(".about .h2");
     private final By locationSelector = By.cssSelector(".about .h3");
     private final By priceSelector = By.cssSelector(".price .h2");
     private final By editButtonSelector = By.cssSelector(".editButton");
+    private final By deleteButtonSelector = By.cssSelector(".deleteButton");
 
     public AdCard(SelenideElement cardElement) {
         this.card = cardElement;
@@ -27,6 +29,7 @@ public class AdCard {
         this.locationElement = card.$(locationSelector);
         this.priceElement = card.$(priceSelector);
         this.editButtonElement = card.$(editButtonSelector);
+        this.deleteButtonElement = card.$(deleteButtonSelector);
     }
 
     public String getTitle() {
@@ -48,6 +51,10 @@ public class AdCard {
 
     public void clickEdit() {
         editButtonElement.shouldBe(visible).click();
+    }
+
+    public void clickDelete() {
+        deleteButtonElement.shouldBe(visible).click();
     }
 
     public EditAdPage editAd() {
@@ -72,7 +79,11 @@ public class AdCard {
         return this;
     }
 
-    public boolean isEditButtonVisible() {
-        return editButtonElement.isDisplayed();
+    public AdCard shouldHaveDeleteButton() {
+        if (!deleteButtonElement.exists()) {
+            throw new AssertionError("Кнопка удаления не найдена на карточке объявления");
+        }
+        deleteButtonElement.shouldBe(visible.because("Кнопка удаления должна быть видима"));
+        return this;
     }
 }
