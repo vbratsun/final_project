@@ -1,4 +1,4 @@
-package stepdefinitions;
+package ru.yandex.practicum;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 

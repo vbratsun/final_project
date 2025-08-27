@@ -1,4 +1,4 @@
-package stepdefinitions;
+package ru.yandex.practicum;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
