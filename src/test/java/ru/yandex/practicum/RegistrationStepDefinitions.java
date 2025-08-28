@@ -1,8 +1,6 @@
 package ru.yandex.practicum;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
-import io.cucumber.java.en.Then;
+import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
 
 import ru.yandex.practicum.api.utils.DataHelper;
@@ -25,7 +23,6 @@ public class RegistrationStepDefinitions {
     @Given("Пользователь уже зарегистрирован в системе")
     public void userAlreadyRegistered() {
         context.createdUser = dataHelper.createRandomUser();
-        // API вызов для регистрации
         context.authClient.registerUser(context.createdUser);
     }
 
@@ -48,9 +45,7 @@ public class RegistrationStepDefinitions {
 
     @When("Пользователь пытается зарегистрироваться с теми же данными")
     public void tryRegisterWithSameData() {
-        context.registrationPage = context.homePage.getHeader()
-                .clickLoginAndRegisterButton()
-                .clickRegisterButton()
+        context.registrationPage = context.registrationPage
                 .tryRegisterUser(context.createdUser);
     }
 
