@@ -12,11 +12,6 @@ public class LoginStepDefinitions {
         this.context = context;
     }
 
-    @Given("Пользователь зарегистрирован в системе")
-    public void userIsRegistered() {
-        // Пользователь уже создан в хуке или предыдущих шагах
-    }
-
     @When("Пользователь открывает страницу логина")
     public void openLoginPage() {
         context.loginPage = context.loginPage.openPage();
