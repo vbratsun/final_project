@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------
+Test set: ru.yandex.practicum.RunCucumberTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 31.79 s <<< FAILURE! -- in ru.yandex.practicum.RunCucumberTest
+Управление объявлениями.Успешное редактирование объявления -- Time elapsed: 13.29 s <<< FAILURE!
+Element should have text "Редактирование объявления" {.createListing_title__IFtFs}
+Element: '<h1 class="h1Mobile createListing_title__IFtFs">Новое объявление</h1>'
+Actual value: text="Новое объявление"
+Screenshot: file:/C:/Courses/Projects/final_project/build/reports/tests/1756382088219.0.png
+Page source: file:/C:/Courses/Projects/final_project/build/reports/tests/1756382088219.0.html
+Timeout: 10 s.
+	at com.codeborne.selenide.impl.WebElementSource.handleError(WebElementSource.java:149)
+	at com.codeborne.selenide.impl.WebElementSource.checkConditionAndReturnElement(WebElementSource.java:127)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:104)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:165)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:132)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:84)
+	at com.sun.proxy.$Proxy17.shouldHave(Unknown Source)
+	at ru.yandex.practicum.ui.pages.EditAdPage.shouldHaveTitle(EditAdPage.java:35)
+	at ru.yandex.practicum.AdvertisementStepDefinitions.editAdFormOpens(AdvertisementStepDefinitions.java:69)
+	at ✽.Форма редактирования объявления открывается(classpath:features/advertisements.feature:22)
+
+Управление объявлениями.Успешное удаление объявления -- Time elapsed: 3.570 s <<< FAILURE!
+java.lang.AssertionError: Кнопка удаления не найдена на карточке объявления
+	at ru.yandex.practicum.ui.components.AdCard.shouldHaveDeleteButton(AdCard.java:91)
+	at ru.yandex.practicum.AdvertisementStepDefinitions.deleteButtonAvailable(AdvertisementStepDefinitions.java:79)
+	at ✽.У объявления доступна кнопка удаления(classpath:features/advertisements.feature:31)
+
