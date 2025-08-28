@@ -14,12 +14,6 @@ public class Hooks {
         // Базовая настройка уже выполнена в конструкторе TestContext
     }
 
-    @Before(value = "@api_registration", order = 10)
-    public void registerUserViaApi() {
-        context.createdUser = context.dataHelper.createRandomUser();
-        context.registerUserViaApi(context.createdUser);
-    }
-
     @After
     public void afterScenario() {
         context.cleanup();

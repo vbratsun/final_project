@@ -4,8 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import ru.yandex.practicum.ui.pages.EditAdPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.page;
 
 public class AdCard {
@@ -50,7 +49,7 @@ public class AdCard {
     }
 
     public void clickEdit() {
-        editButtonElement.shouldBe(visible).click();
+        editButtonElement.shouldBe(exist).shouldBe(visible).click();
     }
 
     public void clickDelete() {
@@ -76,6 +75,14 @@ public class AdCard {
 
     public AdCard shouldHavePrice(int expectedPrice) {
         priceElement.shouldHave(text(expectedPrice + " ₽"));
+        return this;
+    }
+
+    public AdCard shouldHaveEditButton() {
+        if (!editButtonElement.exists()) {
+            throw new AssertionError("Кнопка редактирования не найдена на карточке объявления");
+        }
+        editButtonElement.shouldBe(visible.because("Кнопка редактирования должна быть видима"));
         return this;
     }
 
